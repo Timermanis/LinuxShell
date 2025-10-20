@@ -1,30 +1,30 @@
 tick AllowSelectHTML5
-uporaopa
-Key in – uporaopa
-/dtfixdbprd/datafix
-Skurstenslaukis_4
+gggopa
+Key in – gggopa
+/dtfixdbpcc/datafix
+gggs_4
 /home/jtr44
 
 export_prod
 
 /export/home/datafix
 
-/dtfixdbprd/datafix --prod landing
+/dtfixdbpcc/datafix --prod landing
 
-sudo su – dfixprd
+sudo su – dfixpra
 
 /home/jtr44   ---can access from prod and tes/dev
 
 to copy files to prod
 1. Copy the solution to home/jtr44/
 2. Do below
-sudo su – dfixprd    ------typein but not copy!!!!
+sudo su – dfixpra    ------typein but not copy!!!!
 3. Check permissions for files/folders
 --
 
-changes in /dtfixdbprd/datafix
+changes in /dtfixdbpcc/datafix
 
-sudo su – dfixprd
+sudo su – dfixpra
 cd export_prod
 cp spark_automation_prod_dep.ksh ..
 mv spark_automation_prod_dep.ksh spark_automation.ksh
@@ -33,16 +33,16 @@ cp -r PY_REST/REST_services.py ..
 
 cp -r PY_REST
 
-problem is access /dfixddbtst/datafix/virtual_environments - it is out of PROD scope.
+problem is access /dfixddbtsa/datafix/virtual_environments - it is out of PROD scope.
 try:
-1. Create symlink in home/jtr44 pointing to /dfixddbtst/datafix/virtual_environments
+1. Create symlink in home/jtr44 pointing to /dfixddbtsa/datafix/virtual_environments
 
-ln -s /dfixddbtst/datafix/virtual_environments /home/jtr44/virtual_environments
+ln -s /dfixddbtsa/datafix/virtual_environments /home/jtr44/virtual_environments
 
 --ln: failed to create symbolic link ‘/home/jtr44/virtual_environments’: Permission denied
 created from home/jtr44
 ------------------------------working script--------------------
-/dfixddbtst/datafix
+/dfixddbtsa/datafix
 $ cat spark_automation.ksh
 #!/bin/ksh
 #!/usr/bin/python3
@@ -50,10 +50,10 @@ $ cat spark_automation.ksh
 PATH+=:/usr/bin
 PATH+=:/usr/bin/python3
 #bash
-source /dfixddbtst/datafix/virtual_environments/bin/activate
+source /dfixddbtsa/datafix/virtual_environments/bin/activate
 echo "===================START================================="
-python3 /dfixddbtst/datafix/PY_REST_work_03122024/SPARK_extract.py
-python3 /dfixddbtst/datafix/PY_REST_work_03122024/REST_services.py
+python3 /dfixddbtsa/datafix/PY_REST_work_03122024/SPARK_extract.py
+python3 /dfixddbtsa/datafix/PY_REST_work_03122024/REST_services.py
 deactivate
 echo "===================FINISH================================"
 exit
@@ -68,13 +68,13 @@ cd: virtual_environments: [No such file or directory] symlink
 try: 
 readlink -f virtual_environments
 
-Key in – uporaopa
+Key in – gggopa
 
-ssh jtr44+jtr44@bskyb.com+uporaopa@psmp.corporate.skyvault.sky
+ssh jtr44+jtr44@bskyb.com+a@psmp.corporate.skyvault.sky
 
 putty
 tst IP
-dfixprd
+dfixpra
 90.216.134.196
 $ echo $UID
 76081
@@ -86,7 +86,7 @@ $ curl ifconfig.me
 
 $ id -u jtr44
 107076095
-$ id -u dfixprd
+$ id -u dfixpra
 76081
 
 
@@ -105,9 +105,9 @@ Hi John, repointed and tested the Python scripts from shell with a test tecord. 
 
 
 ------------venv setup P1----------------------
-python3 -m venv /dtfixdbprd/datafix/python_venv
+python3 -m venv /dtfixdbpcc/datafix/python_venv
 
-source /dtfixdbprd/datafix/python_venv/bin/activate
+source /dtfixdbpcc/datafix/python_venv/bin/activate
 deactivate
 pip install --upgrade pip
 python3 -m pip install oracledb
@@ -116,10 +116,11 @@ pip install requests==2.17.3
 pip install TIMEpip
 
 
-drwxr-x---  3 dfixprd dfixprd    1024 Jan 28 12:00 export_prod
--rwxrwxrwx  1 dfixprd dfixprd     409 Jan 28 12:01 spark_automation.ksh
-drwxrwxrwx  2 dfixprd dfixprd      96 Jan 28 12:03 PY_REST
-drwxrwxrwx  6 dfixprd dfixprd    1024 Feb  3 15:14 
-drwxrwx---  3 dfixprd dba     4612096 Feb  4 12:19 logs
+drwxr-x---  3 dfixpra dfixpra    1024 Jan 28 12:00 export_prod
+-rwxrwxrwx  1 dfixpra dfixpra     409 Jan 28 12:01 spark_automation.ksh
+drwxrwxrwx  2 dfixpra dfixpra      96 Jan 28 12:03 PY_REST
+drwxrwxrwx  6 dfixpra dfixpra    1024 Feb  3 15:14 
+drwxrwx---  3 dfixpra dba     4612096 Feb  4 12:19 logs
 
-source /dtfixdbprd/datafix/python_venv/bin/activate
+
+source /dtfixdbpcc/datafix/python_venv/bin/activate
