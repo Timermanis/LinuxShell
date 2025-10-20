@@ -1,0 +1,125 @@
+tick AllowSelectHTML5
+uporaopa
+Key in – uporaopa
+/dtfixdbprd/datafix
+Skurstenslaukis_4
+/home/jtr44
+
+export_prod
+
+/export/home/datafix
+
+/dtfixdbprd/datafix --prod landing
+
+sudo su – dfixprd
+
+/home/jtr44   ---can access from prod and tes/dev
+
+to copy files to prod
+1. Copy the solution to home/jtr44/
+2. Do below
+sudo su – dfixprd    ------typein but not copy!!!!
+3. Check permissions for files/folders
+--
+
+changes in /dtfixdbprd/datafix
+
+sudo su – dfixprd
+cd export_prod
+cp spark_automation_prod_dep.ksh ..
+mv spark_automation_prod_dep.ksh spark_automation.ksh
+cp -r PY_REST/SPARK_extract.py ..
+cp -r PY_REST/REST_services.py ..
+
+cp -r PY_REST
+
+problem is access /dfixddbtst/datafix/virtual_environments - it is out of PROD scope.
+try:
+1. Create symlink in home/jtr44 pointing to /dfixddbtst/datafix/virtual_environments
+
+ln -s /dfixddbtst/datafix/virtual_environments /home/jtr44/virtual_environments
+
+--ln: failed to create symbolic link ‘/home/jtr44/virtual_environments’: Permission denied
+created from home/jtr44
+------------------------------working script--------------------
+/dfixddbtst/datafix
+$ cat spark_automation.ksh
+#!/bin/ksh
+#!/usr/bin/python3
+#!/bin/python3
+PATH+=:/usr/bin
+PATH+=:/usr/bin/python3
+#bash
+source /dfixddbtst/datafix/virtual_environments/bin/activate
+echo "===================START================================="
+python3 /dfixddbtst/datafix/PY_REST_work_03122024/SPARK_extract.py
+python3 /dfixddbtst/datafix/PY_REST_work_03122024/REST_services.py
+deactivate
+echo "===================FINISH================================"
+exit
+exit
+-------------------
+--jtr44
+source virtual_environments/bin/activate
+--tst
+source /home/jtr44/virtual_environments/bin/activate
+--prd
+cd: virtual_environments: [No such file or directory] symlink
+try: 
+readlink -f virtual_environments
+
+Key in – uporaopa
+
+ssh jtr44+jtr44@bskyb.com+uporaopa@psmp.corporate.skyvault.sky
+
+putty
+tst IP
+dfixprd
+90.216.134.196
+$ echo $UID
+76081
+
+
+Sky Vault
+$ curl ifconfig.me
+90.216.134.194
+
+$ id -u jtr44
+107076095
+$ id -u dfixprd
+76081
+
+
+
+id -u jtr44
+
+430131099326
+
+
+Hi John, promoted (copied) and adjusted the automation solution (shell, python) to prod and there is required a peer review for 91728, only thing, running in prod came accross that there is a problem 
+accessing tst from prod user where the virtual environment resides. It hope it will be different if I run it from from datafix job where it is running as oracle user.
+
+
+Hi John, repointed and tested the Python scripts from shell with a test tecord. All works as expected. Now have to wait for a production outage 
+ to get full automation process run from the datafix job.
+
+
+------------venv setup P1----------------------
+python3 -m venv /dtfixdbprd/datafix/python_venv
+
+source /dtfixdbprd/datafix/python_venv/bin/activate
+deactivate
+pip install --upgrade pip
+python3 -m pip install oracledb
+pip install pymssql==2.1.4        (https://pypi.org/project/pymssql/2.1.4/)
+pip install requests==2.17.3
+pip install TIMEpip
+
+
+drwxr-x---  3 dfixprd dfixprd    1024 Jan 28 12:00 export_prod
+-rwxrwxrwx  1 dfixprd dfixprd     409 Jan 28 12:01 spark_automation.ksh
+drwxrwxrwx  2 dfixprd dfixprd      96 Jan 28 12:03 PY_REST
+drwxrwxrwx  6 dfixprd dfixprd    1024 Feb  3 15:14 
+drwxrwx---  3 dfixprd dba     4612096 Feb  4 12:19 logs
+
+source /dtfixdbprd/datafix/python_venv/bin/activate
