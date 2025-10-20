@@ -1,49 +1,49 @@
-sudo su - dfixtst
+sudo su - 
 
-openssl s_client -showcerts -connect <URL where cert is>:443 -servername sdsprd.lwsprd.glb.bskyb.com </dev/null | openssl x509 > "dthing-lwsdat.pem" -- name of temp file
-openssl s_client -showcerts -connect sparkproxyuat.azure-api.net:443 -servername sparkproxyuat.azure-api.net </dev/null | openssl x509 > "spark-lwsdat.pem" -- name of temp file
+openssl s_client -showcerts -connect <URL where cert is>:443 -servername 
+openssl s_client -showcerts -connect bt.azure-api.net:443 -servername 
 
 #des
-openssl s_client -showcerts -connect sparkproxyuat.azure-api.net:443 -servername sparkproxyuat.azure-api.net </dev/null | openssl x509 >spark-lwsdat.pem
+openssl s_client -showcerts -connect btyuat.azure-api.net </dev/null | openssl x509 >spark-o.pem
 
 
-openssl x509 -in spark-lwsdat.pem -noout -fingerprint -sha256
+openssl x509 -noout -fingerprint -sha256
 
-orapki wallet add -wallet . -trusted_cert -cert "spark-lwsdat.pem" 
+orapki w "spark-o.pem" 
 
 compared certificate value and it matches with 
-61e136d6bb521363940884159e3690ca209e3dff56b3a0ded164e13fd8965a63
+61e136d6bb52136394
 ----------------------------
 spark_automation_prod.ksh
 PY_REST
 cd -    get step back
-/dfixddbdev/datafix
-/dfixddbtst/datafix
+//datafix
+//datafix
 
-cp SPARK_extract.py /dfixddbdev/datafix/PY_REST/
-cp REST_services.py /dfixddbdev/datafix/PY_REST/
+cp SPARK_extract.py /gggdbdev/datafix/PY_REST/
+cp REST_services.py /gggdbdev/datafix/PY_REST/
 
-/dfixddbdev/datafix/PY_REST_work_03122024
+/gggdbdev/datafix/PY_REST_work_03122024
 --------------------------------------------------------Get members of group------------------
-awk -F':' '/dfixtst/{print $4}' /etc/group
+awk -F':' '/dddd/{print $4}' /etc/group
 ----------------------------path to wallet--------------
-/dfixddbtst/datafix/wallet     spark-lwsdat.pem
+/gggdbtst/datafix/wallet     spark-o.pem
 --------------------------------------------------------
-wallet password yivkajMops_Op2
+wallet password 
 ------------------------------------------------------
 test webpage
 curl -I -L google.com
-curl -I -L tcse05.lwsdat.glb.bskyb.com     --CONECTION REFUSED
-curl -I -L sparkproxyuat.azure-api.net
-curl -I -L insn01.lwsn01.glb.bskyb.com/cbs-inventory-service/v4/accounts/622695203159/inventory/14654030975599320098449
-https://insn01.lwsn01.glb.bskyb.com/cbs-inventory-service/v4/accounts/622695203159/inventory/14654030975599320098449
+curl -I -L oyu05.o.glb.blvb.com     --CONECTION REFUSED
+curl -I -L bt.azure-api.net
+curl -I -L insn01.lwsn01.glb.blvb.com/cbs-inventory-service/v4/accounts/622695203159/inventory/14654030975599320098449
+https://insn01.lwsn01.glb.blvb.com/cbs-inventory-service/v4/accounts/622695203159/inventory/14654030975599320098449
 curl -I -L int-prodtest.m1amdocs.io
-curl -I -L tcsu01.lwsdat.glb.bskyb.com
+curl -I -L tcsu01.o.glb.blvb.com
 
 ---------------------------------------------------
 python3 -m venv /dtfixdbprd/datafix/python_venv
 ------------------------------------
-Key in – uporaopa
+Key in – cucuopa
 /dtfixdbprd/datafix
 
 /home/jtr44
@@ -51,107 +51,32 @@ Key in – uporaopa
 export_prod
 
  ----------------------------------
-# Switch to dfixprd user
-sudo su – dfixprd
-sudo su - dfixtst
-sudo su - datafix
+# Switch to cucu user
+sudo su – 
+sudo su - 
+sudo su - 
 ----------------------------------=================================
-# Change to wallet directory
-cd wallet
 
-# set ora home
-. ~/set_oracle_home.ksh
-
-# Note: When using orapki below, will be prompted for wallet password – see table dfix_lws_config_wallet
-
-# View certificates in wallet (to see certificate is missing)
-orapki wallet display -wallet .
-
-# Download certificate for sdsprd.lwsprd.glb.bskyb.com
-## openssl s_client -showcerts -connect <URL where cert is>:443 -servername sdsprd.lwsprd.glb.bskyb.com </dev/null | openssl x509 > "dthing-lwsdat.pem" -- name of temp file 
-#des
-openssl s_client -showcerts -connect dthing01d04.lwsdat.glb.bskyb.com:443 -servername dthing01prd.lwsdat.glb.bskyb.com </dev/null | openssl x509 >dthing-lwsdat.pem
-#tc
-openssl s_client -showcerts -connect tcse05.lwsdat.glb.bskyb.com:443 -servername tcse05.lwsdat.glb.bskyb.com </dev/null | openssl x509 >tcse05-lwsdat.pem
-
-# Show SHA256 fingerprint of downloaded certificate
-openssl x509 -in sdsprd_lwsprd_certificate.pem -noout -fingerprint -sha256
-
-# !!! Manually verify that the SHA256 fingerprint above is correct before proceeding
-# Compare against SHA256 fingerprint visible when connecting to the HTTPS URL in your web browser
-
-# Add certificate to wallet  // pw will be asked for again
-## orapki wallet add -wallet . -trusted_cert -cert "dthing-lwsdat.pem"  -- name of temp file from above
-# des
-orapki wallet add -wallet . -trusted_cert -cert dthing-lwsdat.pem
-#TC
-orapki wallet add -wallet . -trusted_cert -cert tcse05-lwsdat.pem
-
-# View certificates in wallet (to see certificate now added)
-orapki wallet display -wallet .
-
-
-chmod -c 644 *
- 
- update-ca-trust extract -------should update certificates
-
-certutil 
 ------------------------------------------------------------------------
 cd /home/jtr44/Copy_PY_working
 --------------------------------------------------------
-sudo su - dfixtst
-# Change to wallet directory
-cd wallet
- 
-# set ora home
-. ~/set_oracle_home.ksh
- 
-# Note: When using orapki below, will be prompted for wallet password – see table dfix_lws_config_wallet
- 
-# View certificates in wallet (to see certificate is missing)
-orapki wallet display -wallet .
- 
-# Download certificate for sdsprd.lwsprd.glb.bskyb.com
-## openssl s_client -showcerts -connect skyuat2.service-now.com:443 -servername skyuat2.service-now.com </dev/null | openssl x509 > "skyuat2-service-now-com.pem" -- name of temp file 
-#des
-openssl s_client -showcerts -connect dthing01d04.lwsdat.glb.bskyb.com:443 -servername dthing01prd.lwsdat.glb.bskyb.com </dev/null | openssl x509 >dthing-lwsdat.pem
-#tc
-openssl s_client -showcerts -connect tcse05.lwsdat.glb.bskyb.com:443 -servername tcse05.lwsdat.glb.bskyb.com </dev/null | openssl x509 >tcse05-lwsdat.pem
- 
-# Show SHA256 fingerprint of downloaded certificate
-openssl x509 -in skyuat2-service-now-com.pem -noout -fingerprint -sha256
- 
-# !!! Manually verify that the SHA256 fingerprint above is correct before proceeding
-# Compare against SHA256 fingerprint visible when connecting to the HTTPS URL in your web browser
- 
-# Add certificate to wallet  // pw will be asked for again
-## orapki wallet add -wallet . -trusted_cert -cert "skyuat2-service-now-com.pem"  -pwd yivkajMops_Op2 -- name of temp file from above
-# des
-orapki wallet add -wallet . -trusted_cert -cert dthing-lwsdat.pem
-#TC
-orapki wallet add -wallet . -trusted_cert -cert tcse05-lwsdat.pem
- 
-# View certificates in wallet (to see certificate now added)
-orapki wallet display -wallet .
- 
-# chmod -c 644 *
+sudo su - dddd
+
 
 ------------------------------------------------------------------------REMOVE certificate
 
-orapki wallet remove -wallet /dfixddbtst/datafix/wallet -trusted_cert -dn CN=www.copeslietas.lv
-orapki wallet remove -wallet /dfixddbtst/datafix/wallet -trusted_cert -dn CN=copeslietas.lv
-orapki wallet remove -wallet /dfixddbtst/datafix/wallet -trusted_cert -dn CN=sparkproxyuat.azure-api.net -pwd yivkajMops_Op2
+orapki wallet remove -wallet /gggdbtst/datafix/wallet -trusted_cert -dn CN=www.copeslietas.lv
+orapki wallet remove -wallet /gggdbtst/datafix/wallet -trusted_cert -dn CN=copeslietas.lv
+orapki wallet remove -wallet /gggdbtst/datafix/wallet -trusted_cert -dn CN=bt.azure-api.net -pwd yivkajMops_Op2
 ---------------------------------------------------------------------
 scheme://[user[:password]@]host[:port]/[...]
 https://
 -------------------------------------------------------------------ODBC drivers on tst-------------
 
-h$ odbcinst -j
+
 unixODBC 2.3.11
 DRIVERS............: /etc/odbcinst.ini
 SYSTEM DATA SOURCES: /etc/odbc.ini
-FILE DATA SOURCES..: /etc/ODBCDataSources
-USER DATA SOURCES..: /dfixddbtst/datafix/.odbc.ini
 SQLULEN Size.......: 8
 SQLLEN Size........: 8
 SQLSETPOSIROW Size.: 8
@@ -199,52 +124,17 @@ urllib3==1.25.6
 -----------------------------------------------------------------
    
    Trusted Certificates:
-Subject:        EMAIL=enterprisenetworksupportscotland@sky.uk,CN=*.lwsdat.glb.bs                                                                                                             kyb.com,OU=IS,O=Sky PLC,L=London,ST=London,C=GB
-Subject:        CN=sparkproxyuat.azure-api.net,O=Microsoft Corporation,L=Redmond                                                                                                             ,ST=WA,C=US
-Subject:        EMAIL=DL-UKISDevOps@sky.com,CN=dthing01dat.bskyb.com,CN=dthing01                                                                                                             dat.bskyb.com/email\=DL-UKISDevOps@sky.uk,OU=UKIS,O=SKY PLC,L=Isleworth,ST=Middl                                                                                                             esex,C=GB
-Subject:        EMAIL=enterprisenetworksupportscotland@sky.uk,CN=*.lwsdat.glb.bs                                                                                                             kyb.com,OU=IS,O=Sky PLC,L=London,ST=London,C=GB
+Subject:        EMAIL=pupu@lv.uk,CN=*.o.glb.bs                                                                                                             kyb.com,OU=IS,O=lv PLC,L=London,ST=London,C=GB
+Subject:        CN=bt.azure-api.net,O=Microsoft Corporation,L=Redmond                                                                                                             ,ST=WA,C=US
+Subject:        EMAIL=DL-UKISDevOps@lv.com,CN=dthing01dat.blvb.com,CN=dthing01                                                                                                             dat.blvb.com/email\=DL-UKISDevOps@lv.uk,OU=UKIS,O=lv PLC,L=Isleworth,ST=Middl                                                                                                             esex,C=GB
+Subject:        EMAIL=pupu@lv.uk,CN=*.o.glb.bs                                                                                                             kyb.com,OU=IS,O=lv PLC,L=London,ST=London,C=GB
 
 ------------------------------------------------------
 
 --------------------------------------------------------
-sudo su - dfixtst
-# Change to wallet directory
-cd wallet
- 
-# set ora home
-. ~/set_oracle_home.ksh
- 
-# Note: When using orapki below, will be prompted for wallet password – see table dfix_lws_config_wallet
- 
-# View certificates in wallet (to see certificate is missing)
-orapki wallet display -wallet .
- 
-# Download certificate for sdsprd.lwsprd.glb.bskyb.com
-## openssl s_client -showcerts -connect https://sparkproxyuat.azure-api.net:443 -servername sparkproxyuat.azure-api.net</dev/null | openssl x509 > "https_sparkproxyuat_azure-api_net.pem" -- name of temp file 
-#des
-openssl s_client -showcerts -connect "https://sparkproxyuat.azure-api.net":443 -servername skyuat1.service-now.com </dev/null | openssl x509 >https_sparkproxyuat.pem
-#tc
-openssl s_client -showcerts -connect tcse05.lwsdat.glb.bskyb.com:443 -servername tcse05.lwsdat.glb.bskyb.com </dev/null | openssl x509 >tcse05-lwsdat.pem
- 
-# Show SHA256 fingerprint of downloaded certificate
-openssl x509 -in https_cio_gov.crt -noout -fingerprint -sha256
- 
-# !!! Manually verify that the SHA256 fingerprint above is correct before proceeding
-# Compare against SHA256 fingerprint visible when connecting to the HTTPS URL in your web browser
- 
-# Add certificate to wallet  // pw will be asked for again
-## orapki wallet add -wallet . -trusted_cert -cert copeslietas.pem -- name of temp file from above
-# des
-orapki wallet add -wallet . -trusted_cert -cert dthing-lwsdat.pem
-#TC
-orapki wallet add -wallet . -trusted_cert -cert https_cio_gov.crt
- 
-# View certificates in wallet (to see certificate now added)
-orapki wallet display -wallet .
- 
-# chmod -c 644 *
+
 -------------------------------------------------------------------------------
-sudo su - dfixtst
+sudo su - dddd
 pip3 install oracledb --user
 
 python3 -m pip --version
@@ -274,7 +164,7 @@ kill -9 16347
 ------remove directory-----------------
 rm -r __pycache__
 
-Update PIP3 to the latest version on dfixddbtst user dfixtst and on dfixddbdev user datafix
+Update PIP3 to the latest version on gggdbtst user dddd and on gggdbdev user datafix
 
 python3 -m ensurepip --upgrade      Requirement already up-to-date: setuptools in /usr/lib/python3.6/site-packages
 -------------------------
@@ -288,7 +178,7 @@ python3 get-pip.py
 
 REST_services.py  SPARK_extract.py  test_jt.ksh
 
-/dfixddbtst/datafix/Copy_PY_working/
+/gggdbtst/datafix/Copy_PY_working/
 
 python3 test_python.py
 
@@ -299,7 +189,7 @@ DQ-5241
 
 PATH=”$PATH:/usr/local/bin/python3”
 
-/dfixddbtst/datafix/.local/lib/python3.6/site-packages/PyInstaller
+/gggdbtst/datafix/.local/lib/python3.6/site-packages/PyInstaller
 python3 -m PyInstaller test_python.py
 python3 -m PyInstaller test_python.spec
 
@@ -308,7 +198,7 @@ python3 -m PyInstaller SPARK_extract.py
 python3 -m PyInstaller --hidden-import uuid SPARK_extract_cx_com.py
 python3 -m PyInstaller SPARK_extract.spec
 
-python3 -m PyInstaller --hidden-import secrets --hidden-import getpass --hidden-import ssl --hidden-import uuid --collect-submodules cryptography --onefile SPARK_extract.py
+python3 -m PyInstaller --hidden-import secrets --hidden-import get --hidden-import ssl --hidden-import uuid --collect-submodules cryptography --onefile SPARK_extract.py
 
 
 python3 -m PyInstaller create_exe_1111/SPARK_extract.py
@@ -320,8 +210,8 @@ python3 -m PyInstaller python_to_extract_1/SPARK_extract.spec
 pip3 install python-secrets
  WARNING: The script pbr is installed in '/home/jtr44/.local/bin' which is not on PATH.
 
-ln /dfixddbtst/datafix/dist/test_python/test_python jt_link_test_hard.ksh
- ln -s /dfixddbtst/datafix/dist/test_python/test_python jt_link_test.ksh
+ln /gggdbtst/datafix/dist/test_python/test_python jt_link_test_hard.ksh
+ ln -s /gggdbtst/datafix/dist/test_python/test_python jt_link_test.ksh
  
  asic Examples
 1. find . -name executeCommand
@@ -343,7 +233,7 @@ pip3 install cryptography
  
  python3 -m pip install oracledb --upgrade
  
- /dfixddbtst/datafix/ftpdrop/FB1637
+ /gggdbtst/datafix/ftpdrop/FB1637
  ------------------------------------------
  SELECT line, tag, text
 FROM 
@@ -352,8 +242,8 @@ TABLE
 ('universal_file_upload.ksh',
 'FB0263', 		-	This MUST be the name of the folder on the sever that holds the file
   ‘Y’ or ‘N’			-	 should now be Y or N
-'DFIXD', 			-	Must be one of the three datafix ENV’s
-'SBI_SKY_DLM_Notification_Start_', 	-	This is file name, without the date part
+'ggg', 			-	Must be one of the three datafix ENV’s
+'SBI_lv_DLM_Notification_Start_', 	-	This is file name, without the date part
 (SELECT 
 u.file_name||to_char(u.file_date, 'YYYYMMDD') -	This is to check the df_data table for ad_hoc files
 FROM df_data.universal_file_upload u	         -	,for this Daily files, this script should ALWAYS return
@@ -362,7 +252,7 @@ WHERE u.runid IS NULL),			         -     nothing, the table is ONLY for ad_hoc f
 'YYYYMMDD', 		-	The format of the date, as above must be one them listed in APPENDIX
 (select to_char(trunc(sysdate)-&NUM_OF_DAYS_OFFSET,'YYYY_MM_DD') from dual), Date offset, most      
 -	        times this will be null, so the parameter should be set to ( -0 )
-'john.howieson@bskyb.com' 	Email list for sending out bad files, if generated by SQL loader
+'john.howieson@blvb.com' 	Email list for sending out bad files, if generated by SQL loader
 )
 )
 ---------------------------------------------------pwd
@@ -391,23 +281,23 @@ append
    click_status
  )
 ----------------------------------------------------------------------------find folder size
-du -m /dfixddbtst/datafix | sort -nr | head -n 20
+du -m /gggdbtst/datafix | sort -nr | head -n 20
 
-du -m /dfixddbtst/datafix/ftpdrop/DQ5377/downloaded | sort -nr | head -n 20
+du -m /gggdbtst/datafix/ftpdrop/DQ5377/downloaded | sort -nr | head -n 20
 ---------------------------------------------------------------------------------Create virtual environment switch to BASH shell step 2-----------------------
-python3 -m venv /dfixddbtst/datafix/virtual_environments
+python3 -m venv /gggdbtst/datafix/virtual_environments
 python3 -m venv virtual_environments  bash: python3.7: command not found
-python3 -m venv /dfixddbtst/datafix/virtual_environments_v2
+python3 -m venv /gggdbtst/datafix/virtual_environments_v2
 --activate--
-source /dfixddbtst/datafix/virtual_environments_v2/bin/activate
+source /gggdbtst/datafix/virtual_environments_v2/bin/activate
 
 step 2. changed to bash 
-cd /dfixddbtst/datafix/virtual_envs/bin
+cd /gggdbtst/datafix/virtual_envs/bin
 source activate
 
 bin/deactivate --there was a problem--should use without -> "source"
-(virtual_envs) dfixtst@udora4pa:~/virtual_envs/bin$ deactivate
-dfixtst@udora4pa:~/virtual_envs/bin$
+(virtual_envs) dddd@udora4pa:~/virtual_envs/bin$ deactivate
+dddd@udora4pa:~/virtual_envs/bin$
 -------
 
 ---check where it is running from---
@@ -423,7 +313,7 @@ In some Linux distributions python 2.7 is not even installed anymore, so only th
 import oracledb
 #import contextlib
 import pymssql --problem because missing 
-(virtual_envs) dfixtst@udora4pa:~$ locate Python.h
+(virtual_envs) dddd@udora4pa:~$ locate Python.h
 /opt/VRTSpython/.pyenv/versions/3.7/include/python3.7m/Python.h
 
 -
@@ -433,24 +323,24 @@ python3 -m pip install pymssql  ----it didn't work so run below
 pip install pymssql==2.2.7  ------it WORKED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 /usr/bin/bash
-source /dfixddbtst/datafix/virtual_environments/bin/activate
+source /gggdbtst/datafix/virtual_environments/bin/activate
 
 --check shell 
 echo $0
 
-/dfixddbtst/datafix/test_venv.ksh[7]: .: /dfixddbtst/datafix/virtual_environments/bin/activate: cannot open [Permission denied]
+/gggdbtst/datafix/test_venv.ksh[7]: .: /gggdbtst/datafix/virtual_environments/bin/activate: cannot open [Permission denied]
 CHMOD 777 all through ACTIVATE!!!
 
 chnod 777 -R virtual_environments
 
-PermissionError: [Errno 13] Permission denied: '/dfixddbtst/datafix/virtual_environments/pyvenv.cfg'
+PermissionError: [Errno 13] Permission denied: '/gggdbtst/datafix/virtual_environments/pyvenv.cfg'
 
 ----------------------order unix folders/files by size
 du -sh -- *  | sort -rh
 ----------------------clean pip cash--------------------
 pip cache purge
 ------------------
-python3 -m pip install getpass
+python3 -m pip install get
 
 python3 -m pip install --upgrade pip
 
@@ -460,23 +350,24 @@ python3 -m pip install psutil ------worked
 python3 -m pip install time
 
 -----------------------------------------promoting Automation to production------------------------
-uporaopa
-uporaopb
-sudo su – dfixprd
+cucuopa
+cucuopb
+sudo su – cucu
 --copy python to prod
-/dfixddbdev/datafix/PY_REST_work_v2/REST_services.py
+/gggdbdev/datafix/PY_REST_work_v2/REST_services.py
 
 --copy to my user
 
-cp -r /dfixddbdev/datafix/PY_REST_work_v2 .
-cp -r /dfixddbdev/datafix/spark_automation_1.ksh .
-cp -r /dfixddbdev/datafix/spark_automation_2.ksh .
+cp -r /gggdbdev/datafix/PY_REST_work_v2 .
+cp -r /gggdbdev/datafix/spark_automation_1.ksh .
+cp -r /gggdbdev/datafix/spark_automation_2.ksh .
 
 --copy user to prod
 
-cp -r PY_REST_work_v2 /dfixdbprd/datafix/
-cp -r /dfixdbprd/datafix/spark_automation_1.ksh
-cp -r /dfixdbprd/datafix/spark_automation_2.ksh
+cp -r PY_REST_work_v2 /gggbprd/datafix/
+cp -r /gggbprd/datafix/spark_automation_1.ksh
+cp -r /gggbprd/datafix/spark_automation_2.ksh
 
 cp /home/jtr44/spark_automation_1.ksh .
+
 cp 
